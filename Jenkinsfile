@@ -15,7 +15,7 @@ pipeline{
         }
         stage('Checkout from Git'){
             steps{
-                git branch: 'main', credentialsId: 'github-token', url: 'https://github.com/Aseemakram19/hotstar-kubernetes.git'
+                git branch: 'main', credentialsId: 'github-token', url: 'https://github.com/Shakthikm/hotstar-kubernetes.git'
             }
         }
         stage("Sonarqube Analysis "){
@@ -40,7 +40,7 @@ pipeline{
         }
         stage('OWASP FS SCAN') {
             steps {
-                dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit --nvdApiKey d7e8c629-7da9-4f96-8a4a-a45fd3f213ba', odcInstallation: 'DC'
+                dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit --nvdApiKey 2bce3fdc-5530-46b5-ac14-5afe0b223546', odcInstallation: 'DC'
                 dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
            }
         }
@@ -54,8 +54,8 @@ pipeline{
                 script{
                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){   
                        sh "docker build -t hotstar ."
-                       sh "docker tag hotstar aseemakram19/hotstar:latest "
-                       sh "docker push aseemakram19/hotstar:latest "
+                       sh "docker tag hotstar 7760472594/hotstar:latest "
+                       sh "docker push 7760472594/hotstar:latest "
                     }
                 }
             }
@@ -88,9 +88,9 @@ pipeline{
                     <p>Started by: ${buildUser}</p>
                     <p>Build URL: <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
                 """,
-                to: 'mohdaseemakram19@gmail.com',
-                from: 'mohdaseemakram19@gmail.com',
-                replyTo: 'mohdaseemakram19@gmail.com',
+                to: 'shakthikumari7899@gmail.com',
+                from: 'shakthikumari7899@gmail.com',
+                replyTo: 'shakthikumari7899@gmail.com',
                 mimeType: 'text/html',
                 attachmentsPattern: 'trivyfs.txt,trivyimage.txt'
             )
